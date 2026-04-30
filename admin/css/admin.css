@@ -1,0 +1,517 @@
+/**
+ * Content Broadcaster — Admin Styles
+ *
+ * Scoped to .cb-wrap so nothing bleeds into the rest of wp-admin.
+ *
+ * @package ContentBroadcaster
+ * @since   1.0.0
+ */
+
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
+
+.cb-wrap {
+    max-width: none;
+    width: auto;
+    margin-right: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, sans-serif;
+}
+
+.cb-page-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.6rem;
+    color: #1d2327;
+    margin-bottom: 8px;
+}
+
+.cb-page-title .dashicons {
+    font-size: 1.6rem;
+    width: 32px;
+    height: 32px;
+    color: #2271b1;
+}
+
+.cb-intro {
+    color: #50575e;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ── Tab Navigation ──────────────────────────────────────────────────────────── */
+
+.cb-tabs {
+    margin-bottom: 0;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.cb-tab-content {
+    padding-top: 24px;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────────── */
+
+.cb-card {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* ── Result Cards ────────────────────────────────────────────────────────────── */
+
+.cb-result-card {
+    border-radius: 6px;
+}
+
+.cb-result-card--success {
+    border-color: #00a32a;
+    background: #f0fff4;
+}
+
+.cb-result-card--success h2 {
+    color: #00a32a;
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+/* ── Form Elements ───────────────────────────────────────────────────────────── */
+
+.cb-form-table th {
+    width: 220px;
+    font-weight: 600;
+    color: #1d2327;
+    vertical-align: middle;
+}
+
+.cb-select {
+    min-width: 340px;
+    font-size: 14px;
+}
+
+.cb-file-input {
+    font-size: 14px;
+    padding: 4px 0;
+}
+
+.cb-submit-btn {
+    margin-top: 16px !important;
+    font-size: 15px !important;
+    height: 40px !important;
+    padding: 0 20px !important;
+}
+
+/* ── Action Buttons ──────────────────────────────────────────────────────────── */
+
+.cb-result-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.cb-action-btn {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+/* Primary green — used for Download and Edit Post */
+.button-primary.cb-action-btn {
+    background: #00a32a;
+    border-color: #007a1f;
+    color: #fff !important;
+}
+
+.button-primary.cb-action-btn:hover,
+.button-primary.cb-action-btn:focus {
+    background: #007a1f;
+    border-color: #006219;
+    color: #fff !important;
+}
+
+/* Secondary — used for View Post */
+.cb-action-btn--secondary {
+    background: #f6f7f7;
+    border: 1px solid #c3c4c7;
+    color: #2271b1 !important;
+}
+
+.cb-action-btn--secondary:hover,
+.cb-action-btn--secondary:focus {
+    background: #e8e9ea;
+    border-color: #a0a1a2;
+    color: #135e96 !important;
+}
+
+/* ── Import Summary Table ─────────────────────────────────────────────────────── */
+
+.cb-summary-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.cb-summary-table th,
+.cb-summary-table td {
+    text-align: left;
+    padding: 6px 10px 6px 0;
+    border-bottom: 1px solid #e6e6e6;
+    vertical-align: top;
+}
+
+.cb-summary-table th {
+    width: 160px;
+    color: #50575e;
+    font-weight: 600;
+}
+
+.cb-summary-table td {
+    color: #1d2327;
+}
+
+/* ── Warnings ────────────────────────────────────────────────────────────────── */
+
+.cb-warnings {
+    margin-top: 16px;
+    border: 1px solid #dba617;
+    border-radius: 4px;
+    background: #fcf9e8;
+    padding: 10px 14px;
+    font-size: 13px;
+}
+
+.cb-warnings summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #7a5c00;
+    user-select: none;
+}
+
+.cb-warnings ul {
+    margin: 8px 0 0 20px;
+    color: #50575e;
+    line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   EC Settings — Environments Table
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Card override: full-width, no side-padding on the table ─────────────── */
+
+.cb-environments-card {
+    padding: 0;
+    overflow: hidden; /* keep rounded corners when table fills edge-to-edge */
+}
+
+.cb-environments-card .cb-table-wrapper {
+    overflow-x: auto; /* horizontal scroll on small screens */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ── Table base ──────────────────────────────────────────────────────────── */
+
+.cb-env-table {
+    border: none !important;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+    table-layout: auto;
+}
+
+.cb-env-table thead th {
+    background: #f6f7f7;
+    color: #50575e;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 10px 12px;
+    border-bottom: 1px solid #c3c4c7;
+    white-space: nowrap;
+}
+
+/* Column widths */
+.cb-env-table .cb-col-drag    { width: 44px;  text-align: center; }
+.cb-env-table .cb-col-nickname{ min-width: 150px; }
+.cb-env-table .cb-col-type    { width: 120px; }
+.cb-env-table .cb-col-url     { min-width: 200px; }
+.cb-env-table .cb-col-key     { min-width: 250px; }
+.cb-env-table .cb-col-sync    { min-width: 180px; }
+.cb-env-table .cb-col-actions { width: 54px;  text-align: center; }
+
+/* ── Body rows ───────────────────────────────────────────────────────────── */
+
+.cb-env-table tbody tr.cb-env-row {
+    border-bottom: 1px solid #f0f0f1;
+    transition: background 0.12s ease;
+}
+
+.cb-env-table tbody tr.cb-env-row:last-child {
+    border-bottom: none;
+}
+
+.cb-env-table tbody tr.cb-env-row:hover {
+    background: #f9f9f9;
+}
+
+.cb-env-table tbody td {
+    padding: 10px 12px;
+    vertical-align: middle;
+}
+
+/* ── Row number badge ────────────────────────────────────────────────────── */
+
+.cb-row-num {
+    color: #a0a1a2;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ── Inputs inside the table ─────────────────────────────────────────────── */
+
+.cb-env-table .cb-input,
+.cb-env-table .cb-select {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+    line-height: 1.4;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    padding: 5px 8px;
+    background: #fff;
+    color: #1d2327;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cb-env-table .cb-input:focus,
+.cb-env-table .cb-select:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+/* Remove WP's default min-width on .regular-text inside tables */
+.cb-env-table input.regular-text {
+    width: 100%;
+    min-width: 0;
+}
+
+/* ── Environment type — colour-coded dropdown ────────────────────────────── */
+
+.cb-type-select {
+    font-weight: 600;
+}
+
+/* Colour the select border by the selected value via JS-added data attribute.
+   We add data-type="dev|qa|staging|production" in the JS on change. */
+.cb-env-row[data-env-type="dev"]        .cb-type-select { border-color: #2271b1; color: #2271b1; }
+.cb-env-row[data-env-type="qa"]         .cb-type-select { border-color: #8c45b8; color: #8c45b8; }
+.cb-env-row[data-env-type="staging"]    .cb-type-select { border-color: #dba617; color: #7a5c00; }
+.cb-env-row[data-env-type="production"] .cb-type-select { border-color: #d63638; color: #d63638; }
+
+/* ── Password field + toggle ─────────────────────────────────────────────── */
+
+.cb-password-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.cb-password-wrap .cb-api-key-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.cb-toggle-pw {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    color: #50575e;
+    cursor: pointer;
+    transition: color 0.12s ease, background 0.12s ease;
+}
+
+.cb-toggle-pw:hover {
+    color: #1d2327;
+    background: #f0f0f1;
+}
+
+.cb-eye-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+}
+
+/* ── Remove row button ───────────────────────────────────────────────────── */
+
+.cb-remove-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid #d63638 !important;
+    border-radius: 3px;
+    color: #d63638 !important;
+    background: #fff !important;
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease;
+    margin: 0 auto;
+}
+
+.cb-remove-row:hover,
+.cb-remove-row:focus {
+    background: #d63638 !important;
+    color: #fff !important;
+}
+
+.cb-remove-row .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 1;
+}
+
+/* ── Empty state notice ──────────────────────────────────────────────────── */
+
+.cb-empty-row td.cb-empty-msg {
+    text-align: center;
+    color: #a0a1a2;
+    font-style: italic;
+    padding: 28px 12px;
+    font-size: 13px;
+}
+
+/* ── Table footer (Add row button row) ────────────────────────────────────── */
+
+.cb-table-footer {
+    padding: 14px 16px;
+    border-top: 1px solid #f0f0f1;
+    background: #fafafa;
+}
+
+.cb-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+}
+
+.cb-add-btn .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 1.1;
+    color: #2271b1;
+}
+
+/* ── Save button ─────────────────────────────────────────────────────────── */
+
+.cb-save-btn {
+    margin-top: 4px !important;
+    font-size: 14px !important;
+    height: 38px !important;
+    padding: 0 20px !important;
+}
+
+.cb-row-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.cb-test-status {
+    margin-top: 4px;
+    font-size: 11px;
+    text-align: center;
+    min-height: 18px;
+}
+
+.cb-status-ok {
+    color: #00a32a;
+    font-weight: 600;
+}
+
+.cb-status-err {
+    color: #d63638;
+    font-weight: 600;
+}
+
+/* ── Responsive: collapse to stacked cards below 900 px ─────────────────── */
+
+@media screen and (max-width: 900px) {
+
+    .cb-env-table,
+    .cb-env-table thead,
+    .cb-env-table tbody,
+    .cb-env-table th,
+    .cb-env-table td,
+    .cb-env-table tr {
+        display: block;
+    }
+
+    .cb-env-table thead {
+        display: none; /* Hide header row — labels shown via ::before */
+    }
+
+    .cb-env-table tbody tr.cb-env-row {
+        border: 1px solid #c3c4c7;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .cb-env-table tbody td {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 4px;
+        border-bottom: 1px solid #f0f0f1;
+    }
+
+    .cb-env-table tbody td:last-child {
+        border-bottom: none;
+    }
+
+    /* Inline labels via data attributes set in render_env_row */
+    .cb-env-table tbody td::before {
+        content: attr( data-label );
+        flex-shrink: 0;
+        width: 120px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #50575e;
+    }
+
+    .cb-col-drag { display: none !important; }
+
+    .cb-col-actions {
+        justify-content: flex-start;
+    }
+
+    .cb-remove-row {
+        margin: 0;
+    }
+}
