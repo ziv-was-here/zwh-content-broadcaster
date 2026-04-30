@@ -239,13 +239,13 @@ file: <binary .zip file>
 ## Support
 
 For issues, questions, or feature requests:
-- **GitHub Issues:** [Report bugs](https://github.com/zivrozenberg/content-broadcaster/issues)
+- **GitHub Issues:** [Report bugs](https://github.com/Roziv/content-broadcaster/issues)
 - **Support Forum:** [WordPress.org Plugin Forum](https://wordpress.org/support/plugin/content-broadcaster/)
 - **Documentation:** See the plugin's admin pages for detailed guides
 
 ## Contributing
 
-Contributions are welcome! Please submit pull requests on [GitHub](https://github.com/zivrozenberg/content-broadcaster).
+Contributions are welcome! Please submit pull requests on [GitHub](https://github.com/Roziv/content-broadcaster).
 
 ## Changelog
 
