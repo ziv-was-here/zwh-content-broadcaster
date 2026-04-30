@@ -41,7 +41,7 @@ class CB_Admin {
         add_action( 'admin_menu',            [ $this, 'register_menu' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
         add_action( 'admin_post_cb_export',  [ $this, 'handle_export_request' ] );
-        add_action( 'admin_post_cb_download',[ $this, 'handle_download_request' ] );
+        add_action( 'admin_post_cb_download', [ $this, 'handle_download_request' ] );
         add_action( 'admin_post_cb_import',  [ $this, 'handle_import_request' ] );
     }
 
@@ -97,7 +97,7 @@ class CB_Admin {
             wp_die( esc_html__( 'You do not have permission to access this page.', 'content-broadcaster' ) );
         }
 
-        // Nonce is not required here as this is a simple GET request to switch UI tabs.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $active_tab = isset( $_GET['tab'] ) && 'import' === $_GET['tab'] ? 'import' : 'export';
         ?>
         <div class="wrap cb-wrap">
@@ -387,7 +387,7 @@ class CB_Admin {
         }
 
         if ( ! isset( $_POST[ self::EXPORT_NONCE_FIELD ] ) ||
-             ! wp_verify_nonce( sanitize_key( $_POST[ self::EXPORT_NONCE_FIELD ] ), self::EXPORT_NONCE_ACTION ) ) {
+             ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST[ self::EXPORT_NONCE_FIELD ] ) ), self::EXPORT_NONCE_ACTION ) ) {
             wp_die( esc_html__( 'Security check failed.', 'content-broadcaster' ) );
         }
 
@@ -416,7 +416,7 @@ class CB_Admin {
         }
 
         if ( ! isset( $_POST[ self::IMPORT_NONCE_FIELD ] ) ||
-             ! wp_verify_nonce( sanitize_key( $_POST[ self::IMPORT_NONCE_FIELD ] ), self::IMPORT_NONCE_ACTION ) ) {
+             ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST[ self::IMPORT_NONCE_FIELD ] ) ), self::IMPORT_NONCE_ACTION ) ) {
             wp_die( esc_html__( 'Security check failed.', 'content-broadcaster' ) );
         }
 
@@ -429,7 +429,7 @@ class CB_Admin {
 
         // Pass an optional status override from the form.
         $status_override = isset( $_POST['cb_import_status'] )
-            ? sanitize_key( $_POST['cb_import_status'] )
+            ? sanitize_key( wp_unslash( $_POST['cb_import_status'] ) )
             : '';
 
         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
@@ -452,16 +452,16 @@ class CB_Admin {
             wp_die( esc_html__( 'Insufficient permissions.', 'content-broadcaster' ) );
         }
 
-        $filename = isset( $_GET['filename'] )
-            ? sanitize_file_name( rawurldecode( wp_unslash( $_GET['filename'] ) ) )
-            : '';
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $raw_filename = isset( $_GET['filename'] ) ? wp_unslash( $_GET['filename'] ) : '';
+        $filename = sanitize_file_name( rawurldecode( $raw_filename ) );
 
         if ( empty( $filename ) ) {
             wp_die( esc_html__( 'No filename specified.', 'content-broadcaster' ) );
         }
 
         if ( ! isset( $_GET['_wpnonce'] ) ||
-             ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'cb_download_' . $filename ) ) {
+             ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'cb_download_' . $filename ) ) {
             wp_die( esc_html__( 'Security check failed.', 'content-broadcaster' ) );
         }
 

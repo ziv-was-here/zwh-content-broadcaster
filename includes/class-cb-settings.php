@@ -158,6 +158,7 @@ class CB_Settings {
      */
     public function enqueue_assets( string $hook ): void {
         // Check if we are on our settings page by URL parameter
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( ! isset( $_GET['page'] ) || $_GET['page'] !== self::PAGE_SLUG ) {
             return;
         }

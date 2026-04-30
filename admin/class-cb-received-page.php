@@ -74,6 +74,7 @@ class CB_Received_Page {
      * Show admin notices.
      */
     public static function show_admin_notices(): void {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( ! isset( $_GET['page'] ) || $_GET['page'] !== 'cb-received' ) {
             return;
         }

@@ -88,6 +88,7 @@ class CB_API_Receiver {
         }
 
         // Check if file is present — Nonces are not used here as this is a machine-to-machine REST API call authenticated via API Key.
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( empty( $_FILES ) || ! isset( $_FILES['file'] ) ) {
             return new WP_REST_Response(
                 array(
@@ -99,6 +100,7 @@ class CB_API_Receiver {
         }
 
         // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         $file = $_FILES['file'];
 
         // Validate file
