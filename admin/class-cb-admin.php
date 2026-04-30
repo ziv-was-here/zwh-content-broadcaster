@@ -452,9 +452,8 @@ class CB_Admin {
             wp_die( esc_html__( 'Insufficient permissions.', 'content-broadcaster' ) );
         }
 
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        $raw_filename = isset( $_GET['filename'] ) ? wp_unslash( $_GET['filename'] ) : '';
-        $filename = sanitize_file_name( rawurldecode( $raw_filename ) );
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        $filename = isset( $_GET['filename'] ) ? sanitize_file_name( rawurldecode( wp_unslash( $_GET['filename'] ) ) ) : '';
 
         if ( empty( $filename ) ) {
             wp_die( esc_html__( 'No filename specified.', 'content-broadcaster' ) );
