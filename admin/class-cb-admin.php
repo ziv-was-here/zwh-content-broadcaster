@@ -12,6 +12,7 @@
  *
  * @package ContentBroadcaster
  * @since   1.0.0
+ * @version 1.1.0 Weathered Chronicle admin redesign.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -74,15 +75,65 @@ class CB_Admin {
      * @since 1.0.0
      */
     public function enqueue_assets( string $hook ): void {
-        if ( $hook !== 'toplevel_page_content-broadcaster' ) {
+        $cb_pages = ( 'toplevel_page_content-broadcaster' === $hook
+            || false !== strpos( $hook, 'cb-settings' )
+            || false !== strpos( $hook, 'cb-received' ) );
+
+        if ( ! $cb_pages ) {
             return;
         }
+        self::enqueue_brand_styles();
+    }
+
+    /**
+     * Enqueues the Weathered Chronicle admin stylesheet and the Epilogue
+     * typeface used across all Content Broadcaster admin screens.
+     *
+     * @since 1.1.0
+     */
+    public static function enqueue_brand_styles(): void {
+        wp_enqueue_style(
+            'content-broadcaster-font',
+            'https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,600;0,700;1,700;1,800&display=swap',
+            [],
+            null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+        );
         wp_enqueue_style(
             'content-broadcaster-admin',
             CB_PLUGIN_URL . 'admin/css/admin.css',
             [],
             CB_VERSION
         );
+    }
+
+    /**
+     * Renders the branded product header shared by all plugin admin screens.
+     *
+     * @param string $tagline  Short uppercase tagline under the product name.
+     *
+     * @since 1.1.0
+     */
+    public static function render_product_header( string $tagline = '' ): void {
+        if ( '' === $tagline ) {
+            $tagline = __( 'Create. Approve. Deploy.', 'content-broadcaster' );
+        }
+        ?>
+        <header class="cb-product-header">
+            <div class="cb-product-brand">
+                <span class="cb-product-mark" aria-hidden="true">
+                    <span class="dashicons dashicons-migrate"></span>
+                </span>
+                <div>
+                    <h1 class="cb-product-title"><?php esc_html_e( 'Content Broadcaster', 'content-broadcaster' ); ?></h1>
+                    <p class="cb-product-tagline"><?php echo esc_html( $tagline ); ?></p>
+                </div>
+            </div>
+            <div class="cb-product-meta">
+                <span class="cb-version-badge">v<?php echo esc_html( CB_VERSION ); ?></span>
+                <a class="cb-brand-link" href="https://zivwashere.com" target="_blank" rel="noopener">zivwashere.com</a>
+            </div>
+        </header>
+        <?php
     }
 
     // ── Main Page Dispatcher ──────────────────────────────────────────────────
@@ -101,10 +152,7 @@ class CB_Admin {
         $active_tab = isset( $_GET['tab'] ) && 'import' === $_GET['tab'] ? 'import' : 'export';
         ?>
         <div class="wrap cb-wrap">
-            <h1 class="cb-page-title">
-                <span class="dashicons dashicons-migrate"></span>
-                <?php esc_html_e( 'Content Broadcaster', 'content-broadcaster' ); ?>
-            </h1>
+            <?php self::render_product_header( __( 'Export & import content between environments', 'content-broadcaster' ) ); ?>
 
             <nav class="nav-tab-wrapper cb-tabs" aria-label="<?php esc_attr_e( 'Broadcaster Tabs', 'content-broadcaster' ); ?>">
                 <a href="<?php echo esc_url( admin_url( 'admin.php?page=content-broadcaster&tab=export' ) ); ?>"

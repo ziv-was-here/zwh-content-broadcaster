@@ -57,39 +57,68 @@ class CB_Send_Metabox {
         wp_add_inline_style(
             'wp-admin',
             '
+            /* Weathered Chronicle (zivwashere.com) metabox styling */
+            #cb_send_metabox .inside {
+                background: #fff8f1;
+            }
             #cb_send_metabox .cb-environments-list {
                 list-style: none;
-                padding: 0;
+                padding: 8px 10px;
                 margin: 0;
+                background: #f9edd4;
+                border: 2px solid #211b0c;
             }
             #cb_send_metabox .cb-environments-list li {
                 margin: 8px 0;
+                font-size: 13px;
+                color: #211b0c;
             }
             #cb_send_metabox .cb-environments-list input[type="checkbox"] {
                 margin-right: 6px;
+                border: 2px solid #211b0c;
+                border-radius: 0;
+            }
+            #cb_send_metabox .cb-environments-list input[type="checkbox"]:checked {
+                background: #aa361d;
+                border-color: #211b0c;
             }
             #cb_send_metabox .cb-send-button {
                 width: 100%;
                 margin-top: 12px;
+                background: #aa361d !important;
+                border: 2px solid #211b0c !important;
+                border-radius: 0 !important;
+                color: #fff !important;
+                font-weight: 700;
+                font-style: italic;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+                text-shadow: none;
+                transition: transform 0.12s ease, box-shadow 0.12s ease;
+            }
+            #cb_send_metabox .cb-send-button:hover,
+            #cb_send_metabox .cb-send-button:focus {
+                background: #7f1802 !important;
+                transform: translate(-2px, -2px);
+                box-shadow: 3px 3px 0 #211b0c;
             }
             #cb_send_metabox .cb-results {
                 margin-top: 12px;
                 padding: 10px;
-                border-radius: 4px;
+                border-radius: 0;
+                border: 2px solid #211b0c;
                 display: none;
             }
             #cb_send_metabox .cb-results.show {
                 display: block;
             }
             #cb_send_metabox .cb-results.success {
-                background-color: #d4edda;
-                border: 1px solid #c3e6cb;
-                color: #155724;
+                background-color: #bdddfe;
+                color: #211b0c;
             }
             #cb_send_metabox .cb-results.error {
-                background-color: #f8d7da;
-                border: 1px solid #f5c6cb;
-                color: #721c24;
+                background-color: #ffdad4;
+                color: #7f1802;
             }
             #cb_send_metabox .cb-result-item {
                 margin: 6px 0;

@@ -200,10 +200,7 @@ class CB_Settings {
         $next_index = count( $environments );
         ?>
         <div class="wrap cb-wrap">
-            <h1 class="cb-page-title">
-                <span class="dashicons dashicons-networking"></span>
-                <?php esc_html_e( 'Content Broadcaster — Remote Environments', 'content-broadcaster' ); ?>
-            </h1>
+            <?php CB_Admin::render_product_header( __( 'Remote environments & API keys', 'content-broadcaster' ) ); ?>
 
             <p class="cb-intro">
                 <?php esc_html_e(

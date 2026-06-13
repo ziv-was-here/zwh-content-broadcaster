@@ -1,14 +1,15 @@
 <?php
 /**
- * Plugin Name:       Content Broadcaster
- * Plugin URI:        https://wordpress.org/plugins/content-broadcaster/
+ * Plugin Name:       ZWH Content Broadcaster
+ * Plugin URI:        https://github.com/ziv-was-here/zwh-content-broadcaster
  * Description:       Export and broadcast posts, pages, and custom content between WordPress environments via REST API or portable .zip archives. Perfect for multi-site workflows, content syndication, and environment synchronization.
  * Version:           1.0.0
- * Author:            zivwashere
- * Author URI:        https://zivwashere.com
+ * Author:            Ziv Rozenberg
+ * Author URI:        https://zivwashere.com/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       content-broadcaster
+ * Text Domain:       zwh-content-broadcaster
+ * Domain Path:       /languages
  * Requires at least: 5.8
  * Requires PHP:      7.4
  *

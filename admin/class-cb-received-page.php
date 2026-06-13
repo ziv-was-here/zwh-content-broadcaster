@@ -103,16 +103,16 @@ class CB_Received_Page {
         $environments = CB_Settings::get_environments();
 
         ?>
-        <div class="wrap">
-            <h1>Received Content</h1>
-            <p>Content sent to you from other environments. Import to add to your site or delete to remove.</p>
+        <div class="wrap cb-wrap">
+            <?php CB_Admin::render_product_header( 'Inbox — content received from other environments' ); ?>
+            <p class="cb-intro">Content sent to you from other environments. Import to add to your site or delete to remove.</p>
 
             <?php if ( empty( $received_files ) ) : ?>
-                <div style="background: #f9f9f9; padding: 20px; border-radius: 4px; border: 1px solid #ddd;">
+                <div class="cb-received-empty">
                     <p><em>No received content yet. When other environments send you content via API, it will appear here.</em></p>
                 </div>
             <?php else : ?>
-                <table class="widefat striped">
+                <table class="cb-received-table">
                     <thead>
                         <tr>
                             <th>Source Environment</th>
