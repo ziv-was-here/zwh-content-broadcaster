@@ -28,7 +28,7 @@ class CB_Ajax_Handler {
         check_ajax_referer( 'cb_settings_nonce', 'nonce' );
 
         if ( ! current_user_can( CB_CAPABILITY ) ) {
-            wp_send_json_error( [ 'message' => __( 'Insufficient permissions.', 'content-broadcaster' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Insufficient permissions.', 'zwh-content-broadcaster' ) ] );
         }
 
         $index = isset( $_POST['index'] ) ? (int) $_POST['index'] : -1;
@@ -46,7 +46,7 @@ class CB_Ajax_Handler {
         }
 
         if ( empty( $environment['site_url'] ) || empty( $environment['api_key'] ) ) {
-            wp_send_json_error( [ 'message' => __( 'Site URL and API Key are required for testing.', 'content-broadcaster' ) ] );
+            wp_send_json_error( [ 'message' => __( 'Site URL and API Key are required for testing.', 'zwh-content-broadcaster' ) ] );
         }
 
         $ping_url = add_query_arg(
@@ -68,13 +68,13 @@ class CB_Ajax_Handler {
         $data = json_decode( $body, true );
 
         if ( $code === 200 && ! empty( $data['success'] ) ) {
-            wp_send_json_success( [ 'message' => $data['message'] ?? __( 'Connection successful!', 'content-broadcaster' ) ] );
+            wp_send_json_success( [ 'message' => $data['message'] ?? __( 'Connection successful!', 'zwh-content-broadcaster' ) ] );
         } else {
-            $message = $data['message'] ?? __( 'Connection failed.', 'content-broadcaster' );
+            $message = $data['message'] ?? __( 'Connection failed.', 'zwh-content-broadcaster' );
             if ( $code === 401 ) {
-                $message = __( 'Invalid API Key.', 'content-broadcaster' );
+                $message = __( 'Invalid API Key.', 'zwh-content-broadcaster' );
             } elseif ( $code === 404 ) {
-                $message = __( 'Plugin not active on target site or invalid URL.', 'content-broadcaster' );
+                $message = __( 'Plugin not active on target site or invalid URL.', 'zwh-content-broadcaster' );
             }
             wp_send_json_error( [ 'message' => "HTTP $code: $message" ] );
         }

@@ -1,0 +1,48 @@
+name: Build & Release Plugin
+
+# Publishes a WordPress-installable zip when you push a version tag:
+#   git tag v1.1.0 && git push origin v1.1.0
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set slug and version
+        id: meta
+        run: |
+          echo "slug=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
+          echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Verify plugin header version matches tag
+        run: |
+          SLUG="${{ steps.meta.outputs.slug }}"
+          VERSION="${{ steps.meta.outputs.version }}"
+          HEADER_VERSION=$(grep -iPo '^\s*\*\s*Version:\s*\K[0-9][0-9a-zA-Z.\-]*' "$SLUG.php" | head -1)
+          echo "Tag: $VERSION / Header: $HEADER_VERSION"
+          if [ "$HEADER_VERSION" != "$VERSION" ]; then
+            echo "::error::Plugin header Version ($HEADER_VERSION) does not match tag ($VERSION). Bump the header before tagging."
+            exit 1
+          fi
+
+      - name: Build zip (top-level folder = slug)
+        run: |
+          SLUG="${{ steps.meta.outputs.slug }}"
+          mkdir -p "build/$SLUG"
+          rsync -a --exclude='.git*' --exclude='build' --exclude='node_modules' --exclude='tests' --exclude='*.md' ./ "build/$SLUG/"
+          cd build && zip -rq "$SLUG.zip" "$SLUG"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/${{ steps.meta.outputs.slug }}.zip
+          generate_release_notes: true

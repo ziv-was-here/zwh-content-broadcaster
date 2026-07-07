@@ -55,8 +55,8 @@ class CB_Admin {
      */
     public function register_menu(): void {
         add_menu_page(
-            __( 'Content Broadcaster', 'content-broadcaster' ),
-            __( 'Broadcaster', 'content-broadcaster' ),
+            __( 'Content Broadcaster', 'zwh-content-broadcaster' ),
+            __( 'Broadcaster', 'zwh-content-broadcaster' ),
             CB_CAPABILITY,
             'content-broadcaster',
             [ $this, 'render_page' ],
@@ -115,7 +115,7 @@ class CB_Admin {
      */
     public static function render_product_header( string $tagline = '' ): void {
         if ( '' === $tagline ) {
-            $tagline = __( 'Create. Approve. Deploy.', 'content-broadcaster' );
+            $tagline = __( 'Create. Approve. Deploy.', 'zwh-content-broadcaster' );
         }
         ?>
         <header class="cb-product-header">
@@ -124,7 +124,7 @@ class CB_Admin {
                     <span class="dashicons dashicons-migrate"></span>
                 </span>
                 <div>
-                    <h1 class="cb-product-title"><?php esc_html_e( 'Content Broadcaster', 'content-broadcaster' ); ?></h1>
+                    <h1 class="cb-product-title"><?php esc_html_e( 'Content Broadcaster', 'zwh-content-broadcaster' ); ?></h1>
                     <p class="cb-product-tagline"><?php echo esc_html( $tagline ); ?></p>
                 </div>
             </div>
@@ -145,23 +145,23 @@ class CB_Admin {
      */
     public function render_page(): void {
         if ( ! current_user_can( CB_CAPABILITY ) ) {
-            wp_die( esc_html__( 'You do not have permission to access this page.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'You do not have permission to access this page.', 'zwh-content-broadcaster' ) );
         }
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $active_tab = isset( $_GET['tab'] ) && 'import' === $_GET['tab'] ? 'import' : 'export';
         ?>
         <div class="wrap cb-wrap">
-            <?php self::render_product_header( __( 'Export & import content between environments', 'content-broadcaster' ) ); ?>
+            <?php self::render_product_header( __( 'Export & import content between environments', 'zwh-content-broadcaster' ) ); ?>
 
-            <nav class="nav-tab-wrapper cb-tabs" aria-label="<?php esc_attr_e( 'Broadcaster Tabs', 'content-broadcaster' ); ?>">
+            <nav class="nav-tab-wrapper cb-tabs" aria-label="<?php esc_attr_e( 'Broadcaster Tabs', 'zwh-content-broadcaster' ); ?>">
                 <a href="<?php echo esc_url( admin_url( 'admin.php?page=content-broadcaster&tab=export' ) ); ?>"
                    class="nav-tab <?php echo $active_tab === 'export' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( '⬆ Export', 'content-broadcaster' ); ?>
+                    <?php esc_html_e( '⬆ Export', 'zwh-content-broadcaster' ); ?>
                 </a>
                 <a href="<?php echo esc_url( admin_url( 'admin.php?page=content-broadcaster&tab=import' ) ); ?>"
                    class="nav-tab <?php echo $active_tab === 'import' ? 'nav-tab-active' : ''; ?>">
-                    <?php esc_html_e( '⬇ Import', 'content-broadcaster' ); ?>
+                    <?php esc_html_e( '⬇ Import', 'zwh-content-broadcaster' ); ?>
                 </a>
             </nav>
 
@@ -195,7 +195,7 @@ class CB_Admin {
         $this->render_notices( $result, 'export' );
         ?>
         <p class="cb-intro">
-            <?php esc_html_e( 'Select a post, page, or custom post type entry. The plugin packages its content, metadata, taxonomy terms, and images into a single .zip archive.', 'content-broadcaster' ); ?>
+            <?php esc_html_e( 'Select a post, page, or custom post type entry. The plugin packages its content, metadata, taxonomy terms, and images into a single .zip archive.', 'zwh-content-broadcaster' ); ?>
         </p>
 
         <div class="cb-card">
@@ -206,11 +206,11 @@ class CB_Admin {
                 <table class="form-table cb-form-table" role="presentation">
                     <tr>
                         <th scope="row">
-                            <label for="cb_post_id"><?php esc_html_e( 'Content to Export', 'content-broadcaster' ); ?></label>
+                            <label for="cb_post_id"><?php esc_html_e( 'Content to Export', 'zwh-content-broadcaster' ); ?></label>
                         </th>
                         <td>
                             <select name="cb_post_id" id="cb_post_id" class="cb-select" required>
-                                <option value="">— <?php esc_html_e( 'Select an item', 'content-broadcaster' ); ?> —</option>
+                                <option value="">— <?php esc_html_e( 'Select an item', 'zwh-content-broadcaster' ); ?> —</option>
                                 <?php foreach ( $posts as $group_label => $group_posts ) : ?>
                                     <optgroup label="<?php echo esc_attr( $group_label ); ?>">
                                         <?php foreach ( $group_posts as $p ) : ?>
@@ -226,18 +226,18 @@ class CB_Admin {
                     </tr>
                 </table>
 
-                <?php submit_button( __( '⬆ Export to Zip', 'content-broadcaster' ), 'primary cb-submit-btn', 'cb_submit' ); ?>
+                <?php submit_button( __( '⬆ Export to Zip', 'zwh-content-broadcaster' ), 'primary cb-submit-btn', 'cb_submit' ); ?>
             </form>
         </div>
 
         <?php if ( ! empty( $result['success'] ) && ! empty( $result['filename'] ) ) : ?>
             <div class="cb-card cb-result-card cb-result-card--success">
-                <h2><?php esc_html_e( 'Export Ready', 'content-broadcaster' ); ?></h2>
+                <h2><?php esc_html_e( 'Export Ready', 'zwh-content-broadcaster' ); ?></h2>
                 <p>
                     <?php
                     printf(
                         /* translators: %s: filename */
-                        esc_html__( 'Archive: %s', 'content-broadcaster' ),
+                        esc_html__( 'Archive: %s', 'zwh-content-broadcaster' ),
                         '<code>' . esc_html( $result['filename'] ) . '</code>'
                     );
                     ?>
@@ -255,7 +255,7 @@ class CB_Admin {
                 <a href="<?php echo esc_url( $download_url ); ?>"
                    class="button button-primary cb-action-btn"
                    id="cb-download-btn">
-                    <?php esc_html_e( '⬇ Download Zip Archive', 'content-broadcaster' ); ?>
+                    <?php esc_html_e( '⬇ Download Zip Archive', 'zwh-content-broadcaster' ); ?>
                 </a>
                 <?php $this->render_warnings( $result['errors'] ?? [] ); ?>
             </div>
@@ -278,7 +278,7 @@ class CB_Admin {
         $this->render_notices( $result, 'import' );
         ?>
         <p class="cb-intro">
-            <?php esc_html_e( 'Upload a .zip archive generated by Content Broadcaster on another site. The plugin will import the content, media, and taxonomy terms into this installation.', 'content-broadcaster' ); ?>
+            <?php esc_html_e( 'Upload a .zip archive generated by Content Broadcaster on another site. The plugin will import the content, media, and taxonomy terms into this installation.', 'zwh-content-broadcaster' ); ?>
         </p>
 
         <div class="cb-card">
@@ -291,7 +291,7 @@ class CB_Admin {
                 <table class="form-table cb-form-table" role="presentation">
                     <tr>
                         <th scope="row">
-                            <label for="cb_zip_file"><?php esc_html_e( 'Broadcaster Archive (.zip)', 'content-broadcaster' ); ?></label>
+                            <label for="cb_zip_file"><?php esc_html_e( 'Broadcaster Archive (.zip)', 'zwh-content-broadcaster' ); ?></label>
                         </th>
                         <td>
                             <input type="file"
@@ -301,45 +301,45 @@ class CB_Admin {
                                    class="cb-file-input"
                                    required>
                             <p class="description">
-                                <?php esc_html_e( 'Only .zip files exported by Content Broadcaster are accepted.', 'content-broadcaster' ); ?>
+                                <?php esc_html_e( 'Only .zip files exported by Content Broadcaster are accepted.', 'zwh-content-broadcaster' ); ?>
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">
-                            <label for="cb_import_status"><?php esc_html_e( 'Import as Status', 'content-broadcaster' ); ?></label>
+                            <label for="cb_import_status"><?php esc_html_e( 'Import as Status', 'zwh-content-broadcaster' ); ?></label>
                         </th>
                         <td>
                             <select name="cb_import_status" id="cb_import_status" class="cb-select">
-                                <option value=""><?php esc_html_e( '— Use original status from archive —', 'content-broadcaster' ); ?></option>
-                                <option value="draft"><?php esc_html_e( 'Draft (safe, review before publishing)', 'content-broadcaster' ); ?></option>
-                                <option value="publish"><?php esc_html_e( 'Published', 'content-broadcaster' ); ?></option>
+                                <option value=""><?php esc_html_e( '— Use original status from archive —', 'zwh-content-broadcaster' ); ?></option>
+                                <option value="draft"><?php esc_html_e( 'Draft (safe, review before publishing)', 'zwh-content-broadcaster' ); ?></option>
+                                <option value="publish"><?php esc_html_e( 'Published', 'zwh-content-broadcaster' ); ?></option>
                             </select>
                             <p class="description">
-                                <?php esc_html_e( 'Override the post status stored inside the archive.', 'content-broadcaster' ); ?>
+                                <?php esc_html_e( 'Override the post status stored inside the archive.', 'zwh-content-broadcaster' ); ?>
                             </p>
                         </td>
                     </tr>
                 </table>
 
-                <?php submit_button( __( '⬇ Import Archive', 'content-broadcaster' ), 'primary cb-submit-btn', 'cb_import_submit' ); ?>
+                <?php submit_button( __( '⬇ Import Archive', 'zwh-content-broadcaster' ), 'primary cb-submit-btn', 'cb_import_submit' ); ?>
             </form>
         </div>
 
         <?php if ( ! empty( $result['success'] ) && ! empty( $result['new_post_id'] ) ) : ?>
             <div class="cb-card cb-result-card cb-result-card--success">
-                <h2><?php esc_html_e( 'Import Complete', 'content-broadcaster' ); ?></h2>
+                <h2><?php esc_html_e( 'Import Complete', 'zwh-content-broadcaster' ); ?></h2>
                 <table class="cb-summary-table">
                     <tr>
-                        <th><?php esc_html_e( 'Post Title', 'content-broadcaster' ); ?></th>
+                        <th><?php esc_html_e( 'Post Title', 'zwh-content-broadcaster' ); ?></th>
                         <td><?php echo esc_html( $result['post_title'] ); ?></td>
                     </tr>
                     <tr>
-                        <th><?php esc_html_e( 'New Post ID', 'content-broadcaster' ); ?></th>
+                        <th><?php esc_html_e( 'New Post ID', 'zwh-content-broadcaster' ); ?></th>
                         <td><?php echo esc_html( $result['new_post_id'] ); ?></td>
                     </tr>
                     <tr>
-                        <th><?php esc_html_e( 'Images Imported', 'content-broadcaster' ); ?></th>
+                        <th><?php esc_html_e( 'Images Imported', 'zwh-content-broadcaster' ); ?></th>
                         <td><?php echo esc_html( $result['images_imported'] ); ?></td>
                     </tr>
                 </table>
@@ -348,7 +348,7 @@ class CB_Admin {
                         <a href="<?php echo esc_url( $result['edit_url'] ); ?>"
                            class="button button-primary cb-action-btn"
                            id="cb-edit-post-btn">
-                            <?php esc_html_e( '✏ Edit Post', 'content-broadcaster' ); ?>
+                            <?php esc_html_e( '✏ Edit Post', 'zwh-content-broadcaster' ); ?>
                         </a>
                     <?php endif; ?>
                     <?php if ( ! empty( $result['view_url'] ) ) : ?>
@@ -356,7 +356,7 @@ class CB_Admin {
                            class="button cb-action-btn cb-action-btn--secondary"
                            id="cb-view-post-btn"
                            target="_blank" rel="noopener">
-                            <?php esc_html_e( '👁 View Post', 'content-broadcaster' ); ?>
+                            <?php esc_html_e( '👁 View Post', 'zwh-content-broadcaster' ); ?>
                         </a>
                     <?php endif; ?>
                 </div>
@@ -383,15 +383,15 @@ class CB_Admin {
 
         if ( ! empty( $result['success'] ) ) {
             $msg = $context === 'import'
-                ? __( 'Import completed successfully!', 'content-broadcaster' )
-                : __( 'Export completed successfully!', 'content-broadcaster' );
+                ? __( 'Import completed successfully!', 'zwh-content-broadcaster' )
+                : __( 'Export completed successfully!', 'zwh-content-broadcaster' );
             echo '<div class="notice notice-success is-dismissible"><p>' . esc_html( $msg ) . '</p></div>';
         } else {
             $errors = $result['errors'] ?? [];
             echo '<div class="notice notice-error is-dismissible"><p>';
             echo esc_html( $context === 'import'
-                ? __( 'Import failed: ', 'content-broadcaster' )
-                : __( 'Export failed: ', 'content-broadcaster' )
+                ? __( 'Import failed: ', 'zwh-content-broadcaster' )
+                : __( 'Export failed: ', 'zwh-content-broadcaster' )
             );
             echo esc_html( implode( ' | ', $errors ) );
             echo '</p></div>';
@@ -411,7 +411,7 @@ class CB_Admin {
         }
         ?>
         <details class="cb-warnings">
-            <summary><?php esc_html_e( 'Non-fatal warnings', 'content-broadcaster' ); ?> (<?php echo count( $warnings ); ?>)</summary>
+            <summary><?php esc_html_e( 'Non-fatal warnings', 'zwh-content-broadcaster' ); ?> (<?php echo count( $warnings ); ?>)</summary>
             <ul>
                 <?php foreach ( $warnings as $w ) : ?>
                     <li><?php echo esc_html( $w ); ?></li>
@@ -431,17 +431,17 @@ class CB_Admin {
      */
     public function handle_export_request(): void {
         if ( ! current_user_can( CB_CAPABILITY ) ) {
-            wp_die( esc_html__( 'Insufficient permissions.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Insufficient permissions.', 'zwh-content-broadcaster' ) );
         }
 
         if ( ! isset( $_POST[ self::EXPORT_NONCE_FIELD ] ) ||
              ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST[ self::EXPORT_NONCE_FIELD ] ) ), self::EXPORT_NONCE_ACTION ) ) {
-            wp_die( esc_html__( 'Security check failed.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Security check failed.', 'zwh-content-broadcaster' ) );
         }
 
         $post_id = isset( $_POST['cb_post_id'] ) ? (int) $_POST['cb_post_id'] : 0;
         if ( $post_id <= 0 ) {
-            wp_die( esc_html__( 'Invalid post ID.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Invalid post ID.', 'zwh-content-broadcaster' ) );
         }
 
         $exporter = new CB_Exporter();
@@ -460,17 +460,17 @@ class CB_Admin {
      */
     public function handle_import_request(): void {
         if ( ! current_user_can( CB_CAPABILITY ) ) {
-            wp_die( esc_html__( 'Insufficient permissions.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Insufficient permissions.', 'zwh-content-broadcaster' ) );
         }
 
         if ( ! isset( $_POST[ self::IMPORT_NONCE_FIELD ] ) ||
              ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST[ self::IMPORT_NONCE_FIELD ] ) ), self::IMPORT_NONCE_ACTION ) ) {
-            wp_die( esc_html__( 'Security check failed.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Security check failed.', 'zwh-content-broadcaster' ) );
         }
 
         // Validate that a file was actually submitted in the request.
         if ( ! isset( $_FILES['cb_zip_file'] ) || empty( $_FILES['cb_zip_file']['tmp_name'] ) ) {
-            wp_die( esc_html__( 'No file was uploaded.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'No file was uploaded.', 'zwh-content-broadcaster' ) );
         }
 
         $importer = new CB_Importer();
@@ -497,19 +497,19 @@ class CB_Admin {
      */
     public function handle_download_request(): void {
         if ( ! current_user_can( CB_CAPABILITY ) ) {
-            wp_die( esc_html__( 'Insufficient permissions.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Insufficient permissions.', 'zwh-content-broadcaster' ) );
         }
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         $filename = isset( $_GET['filename'] ) ? sanitize_file_name( rawurldecode( wp_unslash( $_GET['filename'] ) ) ) : '';
 
         if ( empty( $filename ) ) {
-            wp_die( esc_html__( 'No filename specified.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'No filename specified.', 'zwh-content-broadcaster' ) );
         }
 
         if ( ! isset( $_GET['_wpnonce'] ) ||
              ! wp_verify_nonce( sanitize_key( wp_unslash( $_GET['_wpnonce'] ) ), 'cb_download_' . $filename ) ) {
-            wp_die( esc_html__( 'Security check failed.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'Security check failed.', 'zwh-content-broadcaster' ) );
         }
 
         $zip_path  = CB_EXPORT_DIR . $filename;
@@ -517,11 +517,11 @@ class CB_Admin {
         $real_base = realpath( CB_EXPORT_DIR );
 
         if ( ! $real_zip || ! $real_base || ! str_starts_with( $real_zip, $real_base ) ) {
-            wp_die( esc_html__( 'File not found or access denied.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'File not found or access denied.', 'zwh-content-broadcaster' ) );
         }
 
         if ( ! file_exists( $real_zip ) ) {
-            wp_die( esc_html__( 'The requested archive no longer exists. Please re-export.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'The requested archive no longer exists. Please re-export.', 'zwh-content-broadcaster' ) );
         }
 
         header( 'Content-Type: application/zip' );

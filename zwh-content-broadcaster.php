@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name:       ZWH Content Broadcaster
+ * Update URI:  https://github.com/ziv-was-here/zwh-content-broadcaster
  * Plugin URI:        https://github.com/ziv-was-here/zwh-content-broadcaster
  * Description:       Export and broadcast posts, pages, and custom content between WordPress environments via REST API or portable .zip archives. Perfect for multi-site workflows, content syndication, and environment synchronization.
  * Version:           1.0.0
@@ -10,7 +11,7 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       zwh-content-broadcaster
  * Domain Path:       /languages
- * Requires at least: 5.8
+ * Requires at least: 5.9
  * Requires PHP:      7.4
  *
  * @package ContentBroadcaster
@@ -126,3 +127,9 @@ register_deactivation_hook( __FILE__, 'cb_deactivate' );
 function cb_deactivate(): void {
     // Nothing aggressive needed on deactivation.
 }
+
+// ---------------------------------------------------------------------------
+// GitHub update system
+// ---------------------------------------------------------------------------
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-zwh-github-updater.php';
+new ZWH_GitHub_Updater( __FILE__, 'ziv-was-here/zwh-content-broadcaster' );

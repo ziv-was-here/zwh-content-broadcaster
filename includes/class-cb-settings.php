@@ -68,8 +68,8 @@ class CB_Settings {
     public function register_submenu(): void {
         $this->hook_suffix = add_submenu_page(
             'content-broadcaster',
-            __( 'Content Broadcaster Settings', 'content-broadcaster' ),
-            __( 'Settings', 'content-broadcaster' ),
+            __( 'Content Broadcaster Settings', 'zwh-content-broadcaster' ),
+            __( 'Settings', 'zwh-content-broadcaster' ),
             CB_CAPABILITY,
             self::PAGE_SLUG,
             [ $this, 'render_page' ]
@@ -193,19 +193,19 @@ class CB_Settings {
      */
     public function render_page(): void {
         if ( ! current_user_can( CB_CAPABILITY ) ) {
-            wp_die( esc_html__( 'You do not have permission to access this page.', 'content-broadcaster' ) );
+            wp_die( esc_html__( 'You do not have permission to access this page.', 'zwh-content-broadcaster' ) );
         }
 
         $environments = (array) get_option( self::OPTION_KEY, [] );
         $next_index = count( $environments );
         ?>
         <div class="wrap cb-wrap">
-            <?php CB_Admin::render_product_header( __( 'Remote environments & API keys', 'content-broadcaster' ) ); ?>
+            <?php CB_Admin::render_product_header( __( 'Remote environments & API keys', 'zwh-content-broadcaster' ) ); ?>
 
             <p class="cb-intro">
                 <?php esc_html_e(
                     'Define each remote WordPress environment you want to broadcast content to. Each entry needs a unique nickname, the target site URL, and a valid API key.',
-                    'content-broadcaster'
+                    'zwh-content-broadcaster'
                 ); ?>
             </p>
 
@@ -221,12 +221,12 @@ class CB_Settings {
                         <table class="cb-env-table widefat" id="cb-env-table">
                             <thead>
                                 <tr>
-                                    <th class="cb-col-drag"><?php esc_html_e( '#', 'content-broadcaster' ); ?></th>
-                                    <th class="cb-col-nickname"><?php esc_html_e( 'Nickname', 'content-broadcaster' ); ?></th>
-                                    <th class="cb-col-type"><?php esc_html_e( 'Type', 'content-broadcaster' ); ?></th>
-                                    <th class="cb-col-url"><?php esc_html_e( 'Site URL', 'content-broadcaster' ); ?></th>
-                                    <th class="cb-col-key"><?php esc_html_e( 'API Key', 'content-broadcaster' ); ?></th>
-                                    <th class="cb-col-sync"><?php esc_html_e( 'Sync Method', 'content-broadcaster' ); ?></th>
+                                    <th class="cb-col-drag"><?php esc_html_e( '#', 'zwh-content-broadcaster' ); ?></th>
+                                    <th class="cb-col-nickname"><?php esc_html_e( 'Nickname', 'zwh-content-broadcaster' ); ?></th>
+                                    <th class="cb-col-type"><?php esc_html_e( 'Type', 'zwh-content-broadcaster' ); ?></th>
+                                    <th class="cb-col-url"><?php esc_html_e( 'Site URL', 'zwh-content-broadcaster' ); ?></th>
+                                    <th class="cb-col-key"><?php esc_html_e( 'API Key', 'zwh-content-broadcaster' ); ?></th>
+                                    <th class="cb-col-sync"><?php esc_html_e( 'Sync Method', 'zwh-content-broadcaster' ); ?></th>
                                     <th class="cb-col-actions"></th>
                                 </tr>
                             </thead>
@@ -235,7 +235,7 @@ class CB_Settings {
                                 <?php if ( empty( $environments ) ) : ?>
                                     <tr class="cb-empty-row" id="cb-empty-notice">
                                         <td colspan="7" class="cb-empty-msg">
-                                            <?php esc_html_e( 'No environments defined yet. Click "Add Environment" to get started.', 'content-broadcaster' ); ?>
+                                            <?php esc_html_e( 'No environments defined yet. Click "Add Environment" to get started.', 'zwh-content-broadcaster' ); ?>
                                         </td>
                                     </tr>
                                 <?php else : ?>
@@ -253,13 +253,13 @@ class CB_Settings {
                                 class="button cb-add-btn"
                                 data-next-index="<?php echo esc_attr( $next_index ); ?>">
                             <span class="dashicons dashicons-plus-alt2"></span>
-                            <?php esc_html_e( 'Add Environment', 'content-broadcaster' ); ?>
+                            <?php esc_html_e( 'Add Environment', 'zwh-content-broadcaster' ); ?>
                         </button>
                     </div>
                 </div>
 
                 <?php submit_button(
-                    __( 'Save Environments', 'content-broadcaster' ),
+                    __( 'Save Environments', 'zwh-content-broadcaster' ),
                     'primary cb-save-btn',
                     'cb_save'
                 ); ?>
@@ -295,15 +295,15 @@ class CB_Settings {
         $sync_method = $env['sync_method'] ?? 'manual_zip';
 
         $type_options = [
-            'dev'        => __( 'Dev',        'content-broadcaster' ),
-            'qa'         => __( 'QA',         'content-broadcaster' ),
-            'staging'    => __( 'Staging',    'content-broadcaster' ),
-            'production' => __( 'Production', 'content-broadcaster' ),
+            'dev'        => __( 'Dev',        'zwh-content-broadcaster' ),
+            'qa'         => __( 'QA',         'zwh-content-broadcaster' ),
+            'staging'    => __( 'Staging',    'zwh-content-broadcaster' ),
+            'production' => __( 'Production', 'zwh-content-broadcaster' ),
         ];
 
         $sync_options = [
-            'api_broadcast' => __( 'Direct API Broadcast', 'content-broadcaster' ),
-            'manual_zip'    => __( 'Manual Download & Install', 'content-broadcaster' ),
+            'api_broadcast' => __( 'Direct API Broadcast', 'zwh-content-broadcaster' ),
+            'manual_zip'    => __( 'Manual Download & Install', 'zwh-content-broadcaster' ),
         ];
         ?>
         <tr class="cb-env-row" data-index="<?php echo esc_attr( $idx ); ?>">
@@ -316,16 +316,16 @@ class CB_Settings {
                 <input type="text"
                        name="<?php echo esc_attr( "{$option}[{$idx}][nickname]" ); ?>"
                        value="<?php echo esc_attr( $nickname ); ?>"
-                       placeholder="<?php esc_attr_e( 'e.g. Internal Dev 1', 'content-broadcaster' ); ?>"
+                       placeholder="<?php esc_attr_e( 'e.g. Internal Dev 1', 'zwh-content-broadcaster' ); ?>"
                        class="regular-text cb-input"
-                       aria-label="<?php esc_attr_e( 'Nickname', 'content-broadcaster' ); ?>"
+                       aria-label="<?php esc_attr_e( 'Nickname', 'zwh-content-broadcaster' ); ?>"
                        required>
             </td>
 
             <td class="cb-col-type">
                 <select name="<?php echo esc_attr( "{$option}[{$idx}][type]" ); ?>"
                         class="cb-select cb-type-select"
-                        aria-label="<?php esc_attr_e( 'Environment Type', 'content-broadcaster' ); ?>">
+                        aria-label="<?php esc_attr_e( 'Environment Type', 'zwh-content-broadcaster' ); ?>">
                     <?php foreach ( $type_options as $val => $label ) : ?>
                         <option value="<?php echo esc_attr( $val ); ?>"
                                 <?php selected( $type, $val ); ?>>
@@ -341,7 +341,7 @@ class CB_Settings {
                        value="<?php echo esc_attr( $site_url ); ?>"
                        placeholder="https://target-site.com"
                        class="regular-text cb-input cb-url-input"
-                       aria-label="<?php esc_attr_e( 'Site URL', 'content-broadcaster' ); ?>"
+                       aria-label="<?php esc_attr_e( 'Site URL', 'zwh-content-broadcaster' ); ?>"
                        required>
             </td>
 
@@ -350,19 +350,19 @@ class CB_Settings {
                     <input type="password"
                            name="<?php echo esc_attr( "{$option}[{$idx}][api_key]" ); ?>"
                            value="<?php echo esc_attr( $api_key ); ?>"
-                           placeholder="<?php esc_attr_e( 'xxxx xxxx xxxx xxxx', 'content-broadcaster' ); ?>"
+                           placeholder="<?php esc_attr_e( 'xxxx xxxx xxxx xxxx', 'zwh-content-broadcaster' ); ?>"
                            class="regular-text cb-input cb-api-key-input"
-                           aria-label="<?php esc_attr_e( 'API Key', 'content-broadcaster' ); ?>"
+                           aria-label="<?php esc_attr_e( 'API Key', 'zwh-content-broadcaster' ); ?>"
                            autocomplete="new-password">
                     <button type="button"
                             class="button-link cb-toggle-pw"
-                            aria-label="<?php esc_attr_e( 'Toggle visibility', 'content-broadcaster' ); ?>"
-                            title="<?php esc_attr_e( 'Show / Hide', 'content-broadcaster' ); ?>">
+                            aria-label="<?php esc_attr_e( 'Toggle visibility', 'zwh-content-broadcaster' ); ?>"
+                            title="<?php esc_attr_e( 'Show / Hide', 'zwh-content-broadcaster' ); ?>">
                         <span class="dashicons dashicons-visibility cb-eye-icon"></span>
                     </button>
                     <button type="button"
                             class="button cb-generate-key"
-                            title="<?php esc_attr_e( 'Generate random API key', 'content-broadcaster' ); ?>">
+                            title="<?php esc_attr_e( 'Generate random API key', 'zwh-content-broadcaster' ); ?>">
                         🔑
                     </button>
                 </div>
@@ -371,7 +371,7 @@ class CB_Settings {
             <td class="cb-col-sync">
                 <select name="<?php echo esc_attr( "{$option}[{$idx}][sync_method]" ); ?>"
                         class="cb-select cb-sync-select"
-                        aria-label="<?php esc_attr_e( 'Sync Method', 'content-broadcaster' ); ?>">
+                        aria-label="<?php esc_attr_e( 'Sync Method', 'zwh-content-broadcaster' ); ?>">
                     <?php foreach ( $sync_options as $val => $label ) : ?>
                         <option value="<?php echo esc_attr( $val ); ?>"
                                 <?php selected( $sync_method, $val ); ?>>
@@ -385,13 +385,13 @@ class CB_Settings {
                 <div class="cb-row-actions">
                     <button type="button"
                             class="button cb-test-connection-btn"
-                            title="<?php esc_attr_e( 'Test Connection', 'content-broadcaster' ); ?>"
+                            title="<?php esc_attr_e( 'Test Connection', 'zwh-content-broadcaster' ); ?>"
                             data-index="<?php echo esc_attr( $idx ); ?>">
                         <span class="dashicons dashicons-admin-links"></span>
                     </button>
                     <button type="button"
                             class="button cb-remove-row"
-                            aria-label="<?php esc_attr_e( 'Remove', 'content-broadcaster' ); ?>">
+                            aria-label="<?php esc_attr_e( 'Remove', 'zwh-content-broadcaster' ); ?>">
                         <span class="dashicons dashicons-trash"></span>
                     </button>
                 </div>
