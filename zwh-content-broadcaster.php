@@ -4,7 +4,7 @@
  * Update URI:  https://github.com/ziv-was-here/zwh-content-broadcaster
  * Plugin URI:        https://github.com/ziv-was-here/zwh-content-broadcaster
  * Description:       Export and broadcast posts, pages, and custom content between WordPress environments via REST API or portable .zip archives. Perfect for multi-site workflows, content syndication, and environment synchronization.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Ziv Rozenberg
  * Author URI:        https://zivwashere.com/
  * License:           GPL-2.0-or-later
@@ -31,7 +31,7 @@ define( 'CB_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'CB_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
 
 /** Plugin version string — bump on each release. */
-define( 'CB_VERSION',     '1.0.0' );
+define( 'CB_VERSION',     '1.1.0' );
 
 /**
  * Writable directory where generated zip archives are temporarily stored
